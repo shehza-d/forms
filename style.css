@@ -136,7 +136,7 @@ body {
 	/* position: absolute; */
 	/* top: 50%; */
 	/* left: 40%; */
-	transform: translate(-50%,-50%);
+	/* transform: translate(-00%,16%); */
 	color: rgb(222, 26, 26);
 }
 .mainDiv:nth-child(2){
