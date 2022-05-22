@@ -105,7 +105,7 @@ body {
   }
   
   .submit {
-	background-color: #08d;
+	/* background-color: #08d; */
 	border-radius: 12px;
 	border: 0;
 	box-sizing: border-box;
@@ -114,7 +114,7 @@ body {
 	font-size: 18px;
 	height: 50px;
 	/* margin-top: 38px; */
- outline: 0;
+ /* outline: 0; */
 	text-align: center;
 	width: 100%;
   }
@@ -128,16 +128,16 @@ body {
 .mainDiv{
 	overflow: hidden;
 	border-radius: 12px;
-	width: auto;
-	height: auto;
-	background: transparent;
-	display: flex;
-	align-items: center;
+	/* width: auto; */
+	/* height: auto; */
+	/* background: transparent; */
+	/* display: flex; */
+	/* align-items: center; */
 	/* position: absolute; */
-	top: 50%;
-	left: 40%;
+	/* top: 50%; */
+	/* left: 40%; */
 	transform: translate(-50%,-50%);
-	color: white;
+	color: rgb(222, 26, 26);
 }
 .mainDiv:nth-child(2){
 	position: absolute;
@@ -156,11 +156,11 @@ body {
 	font-size: 25px;
 	letter-spacing: 4px;
 	height: 60px;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
-.secondBTN{
-	background: #A82682;
-}
+	/* .secondBTN{
+		background: #A82682;
+	} */
 .mainDiv>button:before{
 	content: "";
 	position: absolute;
