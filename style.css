@@ -125,47 +125,60 @@ body {
   
 
 /* Button hover CSS from https://codepen.io/vajkri/pen/zrRxmQ */
-.basicBox {
-	width: 280px;
-	height: 65px;
-	margin: 15px auto;
-	color: #4274D3;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 1.15rem;
-	line-height: 65px;
-	text-transform: uppercase;
-	text-align: center;
-	position: relative;
-	cursor: pointer;
-	color: #eee;
-  } 
-svg {
+.mainDiv{
+	overflow: hidden;
+	width: auto;
+	height: auto;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	/* position: absolute; */
+	top: 50%;
+	left: 40%;
+	transform: translate(-50%,-50%);
+	color: white;
+}
+.mainDiv:nth-child(2){
 	position: absolute;
-	top: 0;
-	left: 0;
-  }
-  svg rect, svg path, svg polyline {
-	fill: none;
-	stroke: #4274D3;
-	stroke-width: 1;
-  }
-  .basicBox:hover svg rect{
-	stroke: #e7980f;
-  }
-  /* Basic Box */
-  svg rect {
-	stroke-dasharray: 400, 0;
-	-webkit-transition: all 0.8s ease-in-out;
-	-moz-transition: all 0.8s ease-in-out;
-	-ms-transition: all 0.8s ease-in-out;
-	-o-transition: all 0.8s ease-in-out;
-  }
-  .basicBox:hover svg rect {
-	stroke-width: 3;
-	stroke-dasharray: 35, 245;
-	stroke-dashoffset: 38;
-	-webkit-transition: all 0.8s ease-in-out;
-	-moz-transition: all 0.8s ease-in-out;
-	-ms-transition: all 0.8s ease-in-out;
-	-o-transition: all 0.8s ease-in-out;
-  }
+	top: 50%;
+	left: 58%;
+	transform: translate(-50%,-50%);
+}
+.mainDiv>button{
+	color: #fff;
+	background: #E51A4B;
+	padding: 15px 30px;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: sans-serif;
+	font-size: 25px;
+	letter-spacing: 4px;
+	height: 60px;
+	overflow: hidden;
+}
+.secondBTN{
+	background: #A82682;
+}
+.mainDiv>button:before{
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 200px;
+	background: linear-gradient(to right, transparent 10%, rgba(255,255,255,0.5) 50%, transparent);
+	transform: translate(-50%,-50%);
+	left: -150%;
+	transition: 0.6s;
+}
+.mainDiv>button:hover:before{
+	left: 150%;
+}
+@media only screen and (max-width: 1135px){
+	.mainDiv:nth-child(2){
+		top: 60%;
+		left: 50%;
+	}
+	.mainDiv:nth-child(1){
+		top: 45%;
+		left: 50%;
+	}
+}

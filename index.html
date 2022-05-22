@@ -14,32 +14,46 @@
 
 		<div class="title">Welcome</div>
 		<div class="subtitle">Let's create your account!</div>
+		<div class="subtitle" id="inputError"></div>
+
+
 		<div class="input-container ic1">
-			<input class="input" type="text" placeholder=" " />
+			<input class="input" type="text" placeholder=" " name="name" />
 			<div class="cut"></div>
 			<label for="userName" class="placeholder">Name</label>
 		</div>
 		<div class="input-container ic2">
-			<input class="input" type="email" placeholder=" " required />
+			<input class="input" type="email" placeholder=" " name="email" required />
 			<div class="cut"></div>
 			<label for="Email" class="placeholder">Email</label>
 		</div>
 		<div class="input-container ic2">
-			<input id="password" class="input" type="password" placeholder=" " required />
+			<input id="password" class="input" type="password" placeholder=" " name="password" required />
 			<div class="cut cut-short"></div>
 			<label for="Password" class="placeholder">Password</label>
 		</div>
-		<button type="text" class="submit basicBox">SUBMIT
-			<svg width="360" height="65" viewBox="0 0 130 65" xmlns="http://www.w3.org/2000/svg">
-				<rect x='0' y='0' fill='none' width='360' height='65'/>
-			  </svg>	
-		</button>
 
+		<div class="mainDiv">
+			<button type="text" class="submit secondBTN">SUBMIT
+				
+			</button>
+		</div>
+
+		<div class="subtitle">by Shehzad</div>
 	</form>
+
+	<!-- <div class="mainDiv">
+		<a href="#" class="secondBTN">button</a>
+	</div> -->
+
+
 	<input type="checkbox" onclick="myFunction()">Show Password
+	<script src="./script.js"></script>
+
 	<!-- <script>location.reload();</script> -->
 	<!-- onclick="location.reload();" -->
-	<script src="./index.js"></script>
+	<!-- <a href="https://www.instagram.com/shehza.d/?utm_medium=copy_link">Shehzad</a> -->
+
 </body>
 
 </html>
