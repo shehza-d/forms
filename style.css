@@ -146,7 +146,8 @@ body {
 }
 .mainDiv>button{
 	color: #fff;
-	background: #E51A4B;
+	background-color: #08d;
+	border-radius: 12px;
 	padding: 15px 30px;
 	text-decoration: none;
 	text-transform: uppercase;
