@@ -10,7 +10,7 @@ body {
 	background-color: #15172b;
 	border-radius: 20px;
 	box-sizing: border-box;
-	height: 500px;
+	height: 600px;
 	padding: 20px;
 	width: 320px;
   }
@@ -101,7 +101,7 @@ body {
   }
   
   .input:focus ~ .placeholder {
-	color: #dc2f55;
+	color: #06b;
   }
   
   .submit {
@@ -187,4 +187,9 @@ body {
 		top: 45%;
 		left: 50%;
 	}
+}
+
+/* error msg style */
+#error_msg{
+	color: red;
 }
