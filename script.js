@@ -9,14 +9,23 @@ function show_password() {
 }
 
 function form_valadtion() {
-  //matching password system
+//matching password system
   const pass1 = document.getElementById("password").value;
   const pass2 = document.getElementById("repeat_password").value;
+
   if(pass1===pass2){
-  	console.log("match")
+	console.log("match")
   }else{
   	console.log("Password didn't match!")
+	  document.querySelector('#error_msg').innerText = "Password didn't match";
   }
+
+//Password more then 8 character system
+//    if(pass1>8){
+// 	   console.log("password is more then 8 character fine")
+//    }else{
+// 	  document.querySelector('#error_msg').innerText = "Password should be more then 8 character";
+//    }
 
 
 // console.log("ps1=  "+pass1);
