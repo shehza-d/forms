@@ -20,10 +20,10 @@
 <body>
 	<header>
 		<h1>FG BOYS INTER COLLEGE KARACHI CANTT</h1>
-		<h2>REGISTRATION SLIP</h2>
+		<!-- <h2>REGISTRATION SLIP</h2> -->
 	</header>
 
-	<h3>Online Registration Form For Karachi Board Admission</h3>
+	<h3>Online Registration Form for Karachi Board Admission</h3>
 
 	<form>
 		<!-- <div class="form-group"> -->
@@ -38,22 +38,15 @@
 
 		<label for="phoneNumber">Phone Number</label>
 		<input type="number" id="phoneNumber" max="70" placeholder="Enter your Phone Number" required>
+		
+		<label for="phoneNumber">WhatsApp Number</label>
+		<input type="number" id="phoneNumber" max="70" placeholder="Enter your WhatsApp Number" required>
 
 		<label for="dob">Date of Birth</label>
-		<input type="date" id="dob" required>
-
-
-		<div class="padding">
-			<label for="fb">Federal Board</label>
-			<input type="radio" name="fb" id="fb">
-			<label for="kb">Karachi Board</label>
-			<input type="radio" name="kb" id="kb">
-		</div>
-
-
+		<input type="date" id="dob" min="2006-01-01" max="2009-12-30" step="1" required>
 
 		<label for="formCategory">Category</label>
-		<select name="category">
+		<select name="category" required>
 			<option value="0" selected>Select Category</option>
 			<option value="Civilian">Civilian</option>
 			<option value="Armed Forces">Armed Forces</option>
@@ -72,7 +65,7 @@
 			placeholder="Please enter SSC Percentage" required>
 
 		<label for="form_ssc_passYear">SSC/Matriculation Passing Year </label>
-		<select name="form_ssc_passYear">
+		<select name="form_ssc_passYear" required>
 			<option value="0" selected>Select Category</option>
 			<option value="2022">2022</option>
 		</select>
@@ -83,24 +76,20 @@
 		<!-- <label for="city">City</label>
 		<input type="text" id="city" max="70"  placeholder="Enter your City" required> -->
 
-		<label for="group">Chose your Group: </label>
-		<select name="group" id="group">
+		<label for="group">Chose your Group for XI: </label>
+		<select name="group" id="group" required>
 			<option value="0" selected>Select Group</option>
 			<option value="isc">Computer Science</option>
 			<option value="eng">Pre Engineering</option>
 			<option value="medical">Pre Medical</option>
 			<!-- <option value="arts"></option> -->
-
 		</select>
+
+		<label for="name">Father Occupation</label>
+		<input type="text" id="occupation" max="70" placeholder="Enter your Fathers Occupation" required>
 
 		<label for="form_message">Home Address</label>
 		<textarea id="form_message" name="address" placeholder="Home Address" rows="4" required></textarea>
-
-		<!-- <label for="name">Name</label>
-		<input type="text" id="name" placeholder="Enter your name" required>
-
-		<label for="name">Name</label>
-		<input type="text" id="name" placeholder="Enter your name" required> -->
 
 		<p id="errorMsg"></p>
 
@@ -108,11 +97,6 @@
 
 		<p class="thin">* These fields are required.</p>
 	</form>
-
-	<script src="./script.js"></script>
-
-
-
 
 	<!-- <footer>
 		Made by Okasha and Shehzad batch 2022
@@ -122,7 +106,7 @@
 		
 		Shehzad links
 		https://github.com/shehza-d
-		https://instagram.com/shehza.d?utm_medium=copy_link
+		https://instagram.com/shehza.d
 	</footer> -->
 </body>
 
