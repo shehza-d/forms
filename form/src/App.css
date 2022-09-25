@@ -8,7 +8,43 @@
   }
 } */
 
-body {
+
+/* .homePage{
+
+} */
+.homePage>p{
+  color: #06b;
+}
+.homePage>p>a{
+  text-decoration: none;
+  font-family: inherit;
+  text-decoration: underline;
+  color: #06b;
+}
+
+/* .homePage{
+  
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.App {
 	align-items: center;
 	background-color: #000;
 	display: flex;
