@@ -28,7 +28,7 @@ const Login = () => {
 
 
 	return (
-		<div className="none">
+		<div className="loginForm">
 
 
 			<button><Link to="/">Home</Link></button>
@@ -60,8 +60,9 @@ const Login = () => {
 
 				<p id="error_msg"></p>
 
+				
 				<div className="mainDiv">
-					<button type="submit" className="submit secondBTN">SUBMIT </button>
+					<button type="submint" className="submitBtn">SUBMIT</button>
 				</div>
 				<br />
 

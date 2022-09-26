@@ -9,17 +9,39 @@
 } */
 
 
+.dark {
+	--bg-color: #000;
+	--main-color: white;
+	--twitter-color: #1A8CD8;
+	--lightGray-color: #273340;
+	--form-bg-clr: #15172b;
+}
+
+.light {
+	--bg-color: rgb(247, 247, 247);
+	--main-color: black;
+	--twitter-color: #1A8CD8;
+	--lightGray-color: #E7E7E8;
+	--form-bg-clr: #4553f3;
+}
+
+
 /* .homePage{
 
 } */
-.homePage>p{
-  color: #06b;
+
+
+
+.homePage>p {
+	color: #06b;
 }
-.homePage>p>a{
-  text-decoration: none;
-  font-family: inherit;
-  text-decoration: underline;
-  color: #06b;
+
+.homePage>p>a {
+	text-decoration: none;
+	font-family: inherit;
+	text-decoration: underline;
+	color: #06b;
+
 }
 
 /* .homePage{
@@ -46,52 +68,90 @@
 
 .App {
 	align-items: center;
-	background-color: #000;
+	/* background-color: #000; */
 	display: flex;
 	justify-content: center;
 	height: 100vh;
-  }
-  
-  .form {
-	background-color: #15172b;
+	background-color: var(--bg-color);
+	color: var(--main-color);
+	transition: 1s;
+
+}
+
+.form {
+	/* background-color: #15172b; */
+	background-color: var(--form-bg-clr);
 	border-radius: 20px;
 	box-sizing: border-box;
 	height: 600px;
 	padding: 20px;
 	width: 320px;
-  }
-  
-  .title {
-	color: #eee;
+	transition: 1s;
+
+}
+
+.themeBtn {
+	transition: 1s;
+	cursor: pointer;
+	margin: 10px;
+	padding: 5px;
+	height: 40px;
+	width: 40px;
+	font-size: 25px;
+	border-radius: 50%;
+	border-style: none;
+	border: none;
+	/* background-color: var(--bg-color);
+		color: var(--main-color); */
+	/* transition: 1s; */
+	border: 1px solid gray;
+	position: absolute;
+	top: 40px;
+	right: 20px;
+}
+
+.siderbar>button:hover {
+	transform: scale(1.1);
+	opacity: 0.8;
+}
+
+.title {
+	/* color: #eee; */
+	color: var(--main-color);
 	font-family: sans-serif;
 	font-size: 36px;
 	font-weight: 600;
 	margin-top: 30px;
-  }
-  
-  .subtitle {
-	color: #eee;
+	transition: 1s;
+
+}
+
+.subtitle {
+	/* color: #eee; */
+	color: var(--main-color);
 	font-family: sans-serif;
 	font-size: 16px;
 	font-weight: 600;
 	margin-top: 10px;
-  }
-  
-  .input-container {
+	transition: 1s;
+
+}
+
+.input-container {
 	height: 50px;
 	position: relative;
 	width: 100%;
-  }
-  
-  .ic1 {
+}
+
+.ic1 {
 	margin-top: 40px;
-  }
-  
-  .ic2 {
+}
+
+.ic2 {
 	margin-top: 30px;
-  }
-  
-  .input {
+}
+
+.input {
 	background-color: #303245;
 	border-radius: 12px;
 	border: 0;
@@ -102,10 +162,11 @@
 	outline: 0;
 	padding: 4px 20px 0;
 	width: 100%;
-  }
-  
-  .cut {
-	background-color: #15172b;
+}
+
+.cut {
+	/* background-color: ; */
+	background-color: var(--form-bg-clr);
 	border-radius: 10px;
 	height: 20px;
 	left: 20px;
@@ -114,19 +175,23 @@
 	transform: translateY(0);
 	transition: transform 200ms;
 	width: 76px;
-  }
-  
-  .cut-short {
+	transition: 1s;
+
+}
+
+.cut-short {
 	width: 50px;
-  }
-  
-  .input:focus ~ .cut,
-  .input:not(:placeholder-shown) ~ .cut {
+}
+
+.input:focus~.cut,
+.input:not(:placeholder-shown)~.cut {
 	transform: translateY(8px);
-  }
-  
-  .placeholder {
+}
+
+.placeholder {
 	color: #65657b;
+	/* color: red; */
+
 	font-family: sans-serif;
 	left: 20px;
 	line-height: 14px;
@@ -135,68 +200,59 @@
 	transform-origin: 0 50%;
 	transition: transform 200ms, color 200ms;
 	top: 20px;
-  }
-  
-  .input:focus ~ .placeholder,
-  .input:not(:placeholder-shown) ~ .placeholder {
+}
+
+.input:focus~.placeholder,
+.input:not(:placeholder-shown)~.placeholder {
 	transform: translateY(-30px) translateX(10px) scale(0.75);
-  }
-  
-  .input:not(:placeholder-shown) ~ .placeholder {
+}
+
+.input:not(:placeholder-shown)~.placeholder {
 	color: #808097;
-  }
-  
-  .input:focus ~ .placeholder {
-	color: #06b;
-  }
-  
-  .submit {
-	/* background-color: #08d; */
-	border-radius: 12px;
-	border: 0;
-	box-sizing: border-box;
-	color: #eee;
-	cursor: pointer;
-	font-size: 18px;
-	height: 50px;
-	/* margin-top: 38px; */
- /* outline: 0; */
-	text-align: center;
-	width: 100%;
-  }
-    .submit:active {
-	background-color: #06b;
-  }
-.showPassword{
+}
+
+.input:focus~.placeholder {
+	/* color: #06b; */
+	/* color: red; */
+	color: var(--main-color);
+
+}
+
+.showPassword {
 	color: rgb(212, 211, 211);
 	font-family: sans-serif;
 	font-size: 14px;
 	font-weight: 200;
+	color: var(--main-color);
+	transition: 1s;
 }
 
 /* Button hover CSS from https://codepen.io/vajkri/pen/zrRxmQ */
-.mainDiv{
+.mainDiv {
 	overflow: hidden;
 	border-radius: 12px;
 	/* width: auto; */
 	/* height: auto; */
 	/* background: transparent; */
-	/* display: flex; */
+	display: flex;
 	/* align-items: center; */
 	/* position: absolute; */
 	/* top: 50%; */
 	/* left: 40%; */
-	transform: translate(-00%,13%);
+	transform: translate(-00%, 13%);
 	color: rgb(222, 26, 26);
 }
-.mainDiv:nth-child(2){
+
+.mainDiv:nth-child(2) {
 	position: absolute;
 	top: 50%;
 	left: 58%;
-	transform: translate(-50%,-50%);
+	transform: translate(-50%, -50%);
 }
-.mainDiv>button{
-	color: #fff;
+
+.submitBtn {
+	/* color: #fff; */
+	color: var(--main-color);
 	background-color: #08d;
 	border-radius: 12px;
 	padding: 15px 30px;
@@ -206,40 +262,52 @@
 	font-size: 25px;
 	letter-spacing: 4px;
 	height: 60px;
-	/* overflow: hidden; */
+	transition: 1s;
+	border: 0;
+	box-sizing: border-box;
+	cursor: pointer;
+	/* margin-top: 38px; */
+	outline: 0;
+	text-align: center;
+	width: 100%;
 }
-	/* .secondBTN{
-		background: #A82682;
-	} */
-.mainDiv>button:before{
+
+.submitBtn:before {
 	content: "";
 	position: absolute;
 	width: 100%;
 	height: 200px;
-	background: linear-gradient(to right, transparent 10%, rgba(255,255,255,0.5) 50%, transparent);
-	transform: translate(-50%,-50%);
+	background: linear-gradient(to right, transparent 10%, rgba(255, 255, 255, 0.5) 50%, transparent);
+	transform: translate(-50%, -50%);
 	left: -150%;
 	transition: 0.6s;
 }
-.mainDiv>button:hover:before{
+
+.submitBtn:hover:before {
 	left: 150%;
 }
-@media only screen and (max-width: 1135px){
-	.mainDiv:nth-child(2){
+
+.submitBtn:active {
+	background-color: #06b;
+}
+
+@media only screen and (max-width: 1135px) {
+	.mainDiv:nth-child(2) {
 		top: 60%;
 		left: 50%;
 	}
-	.mainDiv:nth-child(1){
+
+	.mainDiv:nth-child(1) {
 		top: 45%;
 		left: 50%;
 	}
 }
 
 /* error msg style */
-#error_msg{
+#error_msg {
 	color: rgb(254, 46, 46);
 	font-family: sans-serif;
 	font-size: 12px;
 	font-weight: 100;
-	margin:0px;
+	margin: 0px;
 }
