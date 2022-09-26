@@ -1,6 +1,10 @@
 // import { BrowserRouter ,Routes,Route,Link } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useFormik } from 'formik';
+import './index.css';
+
+
+
 
 
 const initialValues={
@@ -30,13 +34,15 @@ const Login = () => {
 	return (
 		<div className="loginForm">
 
+			<div className="btn">
 
 			<button><Link to="/">Home</Link></button>
 			<button><Link to="/login">LogIn</Link></button>
 			<button><Link to="/signup">SignUp</Link></button>
+			</div>
 
 
-			<form  className="form" onSubmit={handleSubmit}>
+			<form  className="form " onSubmit={handleSubmit}>
 
 				<div className="title">Welcome Back Login</div>
 				<div className="subtitle">shehheh!</div>
