@@ -7,12 +7,11 @@ const initialValues = {
 	name: "",
 	email: "",
 	userPhoneNumber: "",
-	password: "",
+	adress:"",
+	websiteURL:"",
+	// name:"",
+	password:"",
 	repeat_password: "",
-	// name:"",
-	// name:"",
-	// name:"",
-	// password:"",
 };
 
 
@@ -33,7 +32,7 @@ const Signup = () => {
 	// console.log(Formik)
 
 	return (
-		<div className="none">
+		<div className="signupForm">
 
 			<button><Link to="/">Home</Link></button>
 			<button><Link to="/login">LogIn</Link></button>
@@ -65,7 +64,16 @@ const Signup = () => {
 					<label htmlFor="email" className="placeholder">Email</label>
 				</div>
 
-
+				<div className="input-container ic2">
+					<input className="input" id="websiteURL" type="websiteURL" placeholder=" " name="websiteURL" required value={values.websiteURL} onChange={handleChange} onBlur={handleBlur} />
+					<div className="cut"></div>
+					<label htmlFor="websiteURL" className="placeholder">Website URL</label>
+				</div>
+				<div className="input-container ic2">
+					<input className="input" id="adress" type="text" placeholder=" " name="adress" required value={values.adress} onChange={handleChange} onBlur={handleBlur} />
+					<div className="cut"></div>
+					<label htmlFor="adress" className="placeholder">Adress</label>
+				</div>
 
 
 
@@ -103,7 +111,7 @@ const Signup = () => {
 				<p id="error_msg"></p>
 
 				<div className="mainDiv">
-					<button type="submint" className="submit secondBTN">SUBMIT </button>
+					<button type="submint" className="submitBtn">SUBMIT</button>
 				</div>
 
 				<div className="subtitle">by Shehzad</div><br />
