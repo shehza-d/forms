@@ -45,7 +45,6 @@ const Signup = () => {
 				// userPhoneNumber: yup.string('Enter your email').required('Email is required').min(2, "please enter more then 2 characters ").max(32, "please enter within 32 characters "),
 				// websiteURL: yup.string().url(),
 
-
 			}),
 		onSubmit: (values) => {
 			console.log(values)
