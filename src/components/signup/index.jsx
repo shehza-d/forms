@@ -73,7 +73,7 @@ const Signup = () => {
         .min(6, "Please enter more then 6 characters ")
         .max(65, "Please enter within 65 characters ")
         .oneOf([yup.ref("password"), null], "Passwords must match"), //line to check if two passwords match
-      userPhoneNumber: yup
+      userPhoneNumber: yup 
         .string("Enter your Phone Number")
         .required("Phone Number is required")
         .min(10, "Please enter more then 10 characters ")
