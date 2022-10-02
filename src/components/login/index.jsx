@@ -60,7 +60,8 @@ const Login = () => {
       </div>
 
       <form className="form " onSubmit={handleSubmit}>
-        <div className="title">Welcome Back to Login</div>
+    
+	    <div className="title">Welcome Back to Login</div>
         <br />
         <div className="subtitle">Thank you for staying connected!</div>
         <div className="subtitle" id="inputError"></div>

@@ -79,6 +79,7 @@
 	background-color: var(--bg-color);
 	color: var(--main-color);
 	transition: 1s;
+	/* font-family: 'serif','Manrope', sans-serif; */
 
 }
 
@@ -92,6 +93,7 @@
 	padding: 20px;
 	width: 320px;
 	transition: 1s;
+	/* font-family: 'serif','Manrope', sans-serif; */
 
 }
 
@@ -113,6 +115,8 @@
 	position: absolute;
 	top: 40px;
 	right: 20px;
+	/* font-family: 'serif','Manrope', sans-serif; */
+
 }
 
 .siderbar>button:hover {
@@ -123,23 +127,24 @@
 .title {
 	/* color: #eee; */
 	color: var(--main-color);
-	font-family: sans-serif;
+
 	font-size: 36px;
 	font-weight: 600;
 	margin-top: 30px;
 	transition: 1s;
+	font-family: inherit;
 
 }
 
 .subtitle {
 	/* color: #eee; */
 	color: var(--main-color);
-	font-family: sans-serif;
+
 	font-size: 16px;
 	font-weight: 600;
 	margin-top: 10px;
 	transition: 1s;
-
+	font-family: inherit;
 }
 
 .input-container {
@@ -167,6 +172,8 @@
 	outline: 0;
 	padding: 4px 20px 0;
 	width: 100%;
+	font-family: inherit;
+
 }
 
 .cut {
@@ -197,7 +204,6 @@
 	color: #65657b;
 	/* color: red; */
 
-	font-family: sans-serif;
 	left: 20px;
 	line-height: 14px;
 	pointer-events: none;
@@ -205,6 +211,9 @@
 	transform-origin: 0 50%;
 	transition: transform 200ms, color 200ms;
 	top: 20px;
+
+	font-family: inherit;
+
 }
 
 .input:focus~.placeholder,
@@ -225,7 +234,6 @@
 
 .showPassword {
 	color: rgb(212, 211, 211);
-	font-family: sans-serif;
 	font-size: 14px;
 	font-weight: 200;
 	color: var(--main-color);
@@ -263,7 +271,6 @@
 	padding: 15px 30px;
 	text-decoration: none;
 	text-transform: uppercase;
-	font-family: sans-serif;
 	font-size: 25px;
 	letter-spacing: 4px;
 	height: 60px;
@@ -311,7 +318,6 @@
 /* error msg style */
 #error_msg {
 	color: rgb(254, 46, 46);
-	font-family: sans-serif;
 	font-size: 12px;
 	font-weight: 100;
 	margin: 0px;

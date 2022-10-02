@@ -8,6 +8,13 @@ import { useState } from "react";
 import { BsFillMoonFill, BsSun } from "react-icons/bs";
 // import { Link } from "react-router-dom";
 
+// Importing Font?
+// <style>
+// @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;800&display=swap');
+// </style>
+
+
+
 const App = () => {
   // const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');nnif (prefersDarkScheme.matches) {n  document.body.classList.add('dark-theme');n} else {n  document.body.classList.remove('dark-theme');n}
   const [themeMode, setThemeMode] = useState("dark");

@@ -24,7 +24,8 @@ const show_password = () => {
 };
 
 const Signup = () => {
-  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+  //   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+  const fmrk = useFormik({
     initialValues: {
       age: "",
       adress: "",
@@ -38,21 +39,29 @@ const Signup = () => {
 
     validationSchema: yup.object({
       age: yup
-        .number()
+        .number("Enter age in number")
         .required("Age is required")
+        .min(13, "User can't be younger then 13")
+        .max(35, "User can't be older then 35")
         .positive("Age can't be negative")
-        .integer(),
+        .integer("Enter age without decimal"),
       adress: yup
         .string("Enter your Adress")
         .required("Adress is required")
         .min(3, "Please enter more then 3 characters ")
         .max(40, "Please enter within 40 characters "),
-      email: yup.string().email(),
+      email: yup
+        .string("Enter your email")
+        .email("Enter your email")
+        .required("Email is required")
+        .min(1)
+        .max(25, "Please enter within 25 characters"),
       name: yup
         .string("Enter your name")
         .required("Name is required")
         .min(4, "Please enter more then 4 characters ")
         .max(15, "Please enter within 15 characters "),
+      // .integer("Enter age without decimal")
       password: yup
         .string("Enter your Password")
         .required("Password is required")
@@ -62,7 +71,8 @@ const Signup = () => {
         .string("Enter your password again")
         .required("Please enter your password again")
         .min(6, "Please enter more then 6 characters ")
-        .max(65, "Please enter within 65 characters "),
+        .max(65, "Please enter within 65 characters ")
+        .oneOf([yup.ref("password"), null], "Passwords must match"), //line to check if two passwords match
       userPhoneNumber: yup
         .string("Enter your Phone Number")
         .required("Phone Number is required")
@@ -76,22 +86,14 @@ const Signup = () => {
 
     onSubmit: (values) => {
       console.log(values);
-
-    //   if (errors) console.log("error is", errors);
+      //do something like there you can call API or send data to firebase
+      //   if (errors) console.log("error is", errors);
     },
   });
   // console.log(Formik)
-  if (errors) console.log("error is", errors);
+  if (fmrk.errors) console.log("error is", fmrk.errors);
 
   return (
-    // console.log(values.name.errors)
-    // console.log(values.email.errors)
-    // console.log(values.userPhoneNumber.errors)
-    // console.log(values.adress.errors)
-    // console.log(values.websiteURL.errors);
-    // console.log(values.password.errors);
-    // console.log(values.repeat_password.errors);
-
     <div className="signupForm">
       <div className="btn">
         <button>
@@ -105,12 +107,11 @@ const Signup = () => {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="form form1">
+      <form onSubmit={fmrk.handleSubmit} className="form form1">
         <div className="title">Welcome to Signup</div>
         <br />
         <div className="subtitle">Let's create your account!</div>
         <div className="subtitle" id="inputError"></div>
-
         <div className="input-container ic1">
           <input
             className="input"
@@ -119,16 +120,17 @@ const Signup = () => {
             id="userName"
             placeholder=" "
             name="name"
-            value={values.name}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            value={fmrk.values.name}
+            onChange={fmrk.handleChange}
+            onBlur={fmrk.handleBlur}
           />
           <div className="cut"></div>
           <label htmlFor="userName" className="placeholder">
             Name *
           </label>
+          <span className="errorSpan">{fmrk.errors.name}</span>
         </div>
-
+        <br />
         <div className="input-container ic1">
           <input
             className="input"
@@ -137,16 +139,17 @@ const Signup = () => {
             id="userPhoneNumber"
             placeholder=" "
             name="userPhoneNumber"
-            value={values.userPhoneNumber}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            value={fmrk.values.userPhoneNumber}
+            onChange={fmrk.handleChange}
+            onBlur={fmrk.handleBlur}
           />
           <div className="cut"></div>
           <label htmlFor="userPhoneNumber" className="placeholder">
             Phone Number *
           </label>
+          <span className="errorSpan">{fmrk.errors.userPhoneNumber}</span>
         </div>
-
+        <br />
         <div className="input-container ic2">
           <input
             className="input"
@@ -154,16 +157,17 @@ const Signup = () => {
             type="email"
             placeholder=" "
             name="email"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            value={fmrk.values.email}
+            onChange={fmrk.handleChange}
+            onBlur={fmrk.handleBlur}
           />
           <div className="cut"></div>
           <label htmlFor="email" className="placeholder">
             Email *
           </label>
+          <span className="errorSpan">{fmrk.errors.email}</span>
         </div>
-
+        <br />
         <div className="input-container ic2">
           <input
             className="input"
@@ -171,15 +175,17 @@ const Signup = () => {
             type="websiteURL"
             placeholder=" "
             name="websiteURL"
-            value={values.websiteURL}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            value={fmrk.values.websiteURL}
+            onChange={fmrk.handleChange}
+            onBlur={fmrk.handleBlur}
           />
           <div className="cut"></div>
           <label htmlFor="websiteURL" className="placeholder">
             Website URL
           </label>
+          <span className="errorSpan">{fmrk.errors.websiteURL}</span>
         </div>
+        <br />
         <div className="input-container ic2">
           <input
             className="input"
@@ -187,16 +193,17 @@ const Signup = () => {
             type="text"
             placeholder=" "
             name="adress"
-            value={values.adress}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            value={fmrk.values.adress}
+            onChange={fmrk.handleChange}
+            onBlur={fmrk.handleBlur}
           />
           <div className="cut"></div>
           <label htmlFor="adress" className="placeholder">
             Adress *
           </label>
+          <span className="errorSpan">{fmrk.errors.adress}</span>
         </div>
-
+        <br />
         <div className="input-container ic2">
           <input
             className="input"
@@ -204,16 +211,17 @@ const Signup = () => {
             type="text"
             placeholder=" "
             name="age"
-            value={values.age}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            value={fmrk.values.age}
+            onChange={fmrk.handleChange}
+            onBlur={fmrk.handleBlur}
           />
           <div className="cut"></div>
           <label htmlFor="age" className="placeholder">
             Age *
           </label>
+          <span className="errorSpan">{fmrk.errors.age}</span>
         </div>
-
+        <br />
         <div className="input-container ic2">
           <input
             id="password"
@@ -221,19 +229,24 @@ const Signup = () => {
             type="password"
             placeholder=" "
             name="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            value={fmrk.values.password}
+            onChange={fmrk.handleChange}
+            onBlur={fmrk.handleBlur}
           />
           <div className="cut cut-short"></div>
           <label htmlFor="Password" className="placeholder">
-           Create Password *
+            Create Password *
           </label>
+          <input
+            className="showPasswordBtn"
+            type="checkbox"
+            onClick={show_password}
+          />
+          <span className="errorSpan">{fmrk.errors.password}</span>
         </div>
-
-        <input type="checkbox" onClick={show_password} />
-        <span className="showPassword">Show Password</span>
-
+        <br /> <br />
+        {/* <input type="checkbox" onClick={show_password} /> */}
+        {/* <span className="showPassword">Show Password</span> */}
         <div className="input-container ic2">
           <input
             id="repeat_password"
@@ -241,27 +254,28 @@ const Signup = () => {
             type="password"
             placeholder=" "
             name="repeat_password"
-            value={values.repeat_password}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            value={fmrk.values.repeat_password}
+            onChange={fmrk.handleChange}
+            onBlur={fmrk.handleBlur}
           />
           <div className="cut cut-short"></div>
           <label htmlFor="repeat_password" className="placeholder">
-            Repeat Password 
+            Repeat Password
           </label>
+          <span className="errorSpan">{fmrk.errors.repeat_password}</span>
         </div>
-
+        <br /> <br />
         {/* <p id="error_msg">{errors}</p> */}
-
         <div className="mainDiv">
           <button type="submint" className="submitBtn">
             SUBMIT
           </button>
         </div>
-
+        <br />
         <div className="subtitle">by Shehzad</div>
         <br />
       </form>
+      <br />
     </div>
   );
 };
