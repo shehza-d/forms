@@ -14,6 +14,9 @@ import "./index.css";
 // 	repeat_password: "",
 // };
 
+// console.log(values.name.errors);
+// console.log(values.name.errors);
+
 const show_password = () => {
   const pass1 = document.getElementById("password");
   if (pass1.type === "password") pass1.type = "text";
@@ -32,28 +35,63 @@ const Signup = () => {
       userPhoneNumber: "",
       websiteURL: "",
     },
+
     validationSchema: yup.object({
-      age: yup.number().required().positive().integer(),
-      // adress: yup.string('Enter your email').required('Email is required').min(2, "please enter more then 2 characters ").max(32, "please enter within 32 characters "),
+      age: yup
+        .number()
+        .required("Age is required")
+        .positive("Age can't be negative")
+        .integer(),
+      adress: yup
+        .string("Enter your Adress")
+        .required("Adress is required")
+        .min(3, "Please enter more then 3 characters ")
+        .max(40, "Please enter within 40 characters "),
       email: yup.string().email(),
       name: yup
-        .string("Enter your email")
-        .required("Email is required")
-        .min(2, "please enter more then 2 characters ")
-        .max(32, "please enter within 32 characters "),
-      // password: yup.string('Enter your email').required('Email is required').min(2, "please enter more then 2 characters ").max(32, "please enter within 32 characters "),
-      // repeat_password: yup.string('Enter your email').required('Email is required').min(2, "please enter more then 2 characters ").max(32, "please enter within 32 characters "),
-      // userPhoneNumber: yup.string('Enter your email').required('Email is required').min(2, "please enter more then 2 characters ").max(32, "please enter within 32 characters "),
-      // websiteURL: yup.string().url(),
+        .string("Enter your name")
+        .required("Name is required")
+        .min(4, "Please enter more then 4 characters ")
+        .max(15, "Please enter within 15 characters "),
+      password: yup
+        .string("Enter your Password")
+        .required("Password is required")
+        .min(6, "Please enter more then 6 characters ")
+        .max(65, "Please enter within 65 characters "),
+      repeat_password: yup
+        .string("Enter your password again")
+        .required("Please enter your password again")
+        .min(6, "Please enter more then 6 characters ")
+        .max(65, "Please enter within 65 characters "),
+      userPhoneNumber: yup
+        .string("Enter your Phone Number")
+        .required("Phone Number is required")
+        .min(10, "Please enter more then 10 characters ")
+        .max(15, "Please enter within 15 characters "),
+      websiteURL: yup
+        .string()
+        .url("Only enter Website URL")
+        .max(40, "Website URL can't be more then 40"),
     }),
+
     onSubmit: (values) => {
       console.log(values);
+
+    //   if (errors) console.log("error is", errors);
     },
   });
-  console.log(errors);
   // console.log(Formik)
+  if (errors) console.log("error is", errors);
 
   return (
+    // console.log(values.name.errors)
+    // console.log(values.email.errors)
+    // console.log(values.userPhoneNumber.errors)
+    // console.log(values.adress.errors)
+    // console.log(values.websiteURL.errors);
+    // console.log(values.password.errors);
+    // console.log(values.repeat_password.errors);
+
     <div className="signupForm">
       <div className="btn">
         <button>
@@ -69,6 +107,7 @@ const Signup = () => {
 
       <form onSubmit={handleSubmit} className="form form1">
         <div className="title">Welcome to Signup</div>
+        <br />
         <div className="subtitle">Let's create your account!</div>
         <div className="subtitle" id="inputError"></div>
 
@@ -86,7 +125,7 @@ const Signup = () => {
           />
           <div className="cut"></div>
           <label htmlFor="userName" className="placeholder">
-            Name
+            Name *
           </label>
         </div>
 
@@ -104,7 +143,7 @@ const Signup = () => {
           />
           <div className="cut"></div>
           <label htmlFor="userPhoneNumber" className="placeholder">
-            Phone Number
+            Phone Number *
           </label>
         </div>
 
@@ -121,7 +160,7 @@ const Signup = () => {
           />
           <div className="cut"></div>
           <label htmlFor="email" className="placeholder">
-            Email
+            Email *
           </label>
         </div>
 
@@ -154,7 +193,7 @@ const Signup = () => {
           />
           <div className="cut"></div>
           <label htmlFor="adress" className="placeholder">
-            Adress
+            Adress *
           </label>
         </div>
 
@@ -171,7 +210,7 @@ const Signup = () => {
           />
           <div className="cut"></div>
           <label htmlFor="age" className="placeholder">
-            Age
+            Age *
           </label>
         </div>
 
@@ -188,7 +227,7 @@ const Signup = () => {
           />
           <div className="cut cut-short"></div>
           <label htmlFor="Password" className="placeholder">
-            Password{" "}
+           Create Password *
           </label>
         </div>
 
@@ -208,7 +247,7 @@ const Signup = () => {
           />
           <div className="cut cut-short"></div>
           <label htmlFor="repeat_password" className="placeholder">
-            Repeat Password
+            Repeat Password 
           </label>
         </div>
 

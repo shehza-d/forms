@@ -1,12 +1,13 @@
 // import { BrowserRouter ,Routes,Route,Link } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
+import * as yup from "yup";
 import "./index.css";
 
-const initialValues = {
-  email: "",
-  password: "",
-};
+// const initialValues = {
+//   email: "",
+//   password: "",
+// };
 
 const show_password = () => {
   const pass1 = document.getElementById("password");
@@ -16,9 +17,30 @@ const show_password = () => {
 
 const Login = () => {
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: initialValues,
-    onSubmit: (values) => {
-      console.log(values);
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    // validationSchema: yup.object({ 
+    //   email: yup
+    //     .string()
+    //     .email("Enter valid email")
+    //     // .string("Enter your email")
+    //     // .required("Email is required")
+    //     .min(3, "Please enter more then 3 characters ")
+    //     .max(32, "Please enter within 32 characters "),
+    //   password: yup
+    //     // .string("Enter yo ur email")
+    //     // .required("Email is required")
+    //     .min(6, "Please enter more then 6 characters ")
+    //     .max(64, "Please enter within 64 characters ")
+    //   // repeat_password: yup.string('Enter your email').required('Email is required').min(2, "please enter more then 2 characters ").max(32, "please enter within 32 characters "),
+    //   // userPhoneNumber: yup.string('Enter your email').required('Email is required').min(2, "please enter more then 2 characters ").max(32, "please enter within 32 characters "),
+    // }),
+    onSubmit: (inputValues) => {
+      console.log(inputValues);
+  console.log(errors);
+
     },
   });
   // console.log(Formik)
@@ -38,8 +60,9 @@ const Login = () => {
       </div>
 
       <form className="form " onSubmit={handleSubmit}>
-        <div className="title">Welcome Back Login</div>
-        <div className="subtitle">shehheh!</div>
+        <div className="title">Welcome Back to Login</div>
+        <br />
+        <div className="subtitle">Thank you for staying connected!</div>
         <div className="subtitle" id="inputError"></div>
 
         <div className="input-container ic2">
@@ -49,7 +72,6 @@ const Login = () => {
             type="email"
             placeholder=" "
             name="email"
-            required
             autoComplete="off"
             value={values.email}
             onChange={handleChange}
@@ -67,7 +89,6 @@ const Login = () => {
             type="password"
             placeholder=" "
             name="password"
-            required
             autoComplete="off"
             value={values.password}
             onChange={handleChange}
