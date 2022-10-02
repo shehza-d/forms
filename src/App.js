@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { BsFillMoonFill, BsSun } from "react-icons/bs";
 
 
-function App() {
+const App=()=> {
 
   // const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');nnif (prefersDarkScheme.matches) {n  document.body.classList.add('dark-theme');n} else {n  document.body.classList.remove('dark-theme');n}
   const [themeMode, setThemeMode] = useState("dark")
