@@ -3,65 +3,61 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "./index.css";
-
-// const initialValues = {
-//   email: "",
-//   password: "",
-// };
-
-const show_password = () => {
-  const pass1 = document.getElementById("password");
-  if (pass1.type === "password") pass1.type = "text";
-  else pass1.type = "password";
-};
+import { useState } from "react";
+import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 
 const Login = () => {
-  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    // validationSchema: yup.object({ 
-    //   email: yup
-    //     .string()
-    //     .email("Enter valid email")
-    //     // .string("Enter your email")
-    //     // .required("Email is required")
-    //     .min(3, "Please enter more then 3 characters ")
-    //     .max(32, "Please enter within 32 characters "),
-    //   password: yup
-    //     // .string("Enter yo ur email")
-    //     // .required("Email is required")
-    //     .min(6, "Please enter more then 6 characters ")
-    //     .max(64, "Please enter within 64 characters ")
-    //   // repeat_password: yup.string('Enter your email').required('Email is required').min(2, "please enter more then 2 characters ").max(32, "please enter within 32 characters "),
-    //   // userPhoneNumber: yup.string('Enter your email').required('Email is required').min(2, "please enter more then 2 characters ").max(32, "please enter within 32 characters "),
-    // }),
-    onSubmit: (inputValues) => {
-      console.log(inputValues);
-  console.log(errors);
+  //function to show password
+  const [showPswIcon, setShowPswIcon] = useState("eyeOpen");
+  const pass1 = document.querySelector("#userPassword");
+  const show_password = () => {
+    if (pass1.type === "password") {
+      pass1.type = "text";
+      setShowPswIcon("eyeClose");
+    } else {
+      pass1.type = "password";
+      setShowPswIcon("eyeOpen");
+    }
+  };
 
-    },
-  });
+  const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+      },
+      validationSchema: yup.object({
+        email: yup
+          .string("Enter your email")
+          .email("Enter valid email")
+          .required("Email is required")
+          .min(3, "Please enter more then 3 characters ")
+          .max(32, "Please enter within 32 characters "),
+        password: yup
+          .string("Enter your Password") //.password()
+          .required("Password is required")
+          .min(6, "Please enter more then 6 characters ")
+          .max(64, "Please enter within 64 characters "),
+      }),
+      onSubmit: (inputValues) => {
+        console.log(inputValues);
+        console.log(errors);
+      },
+    });
   // console.log(Formik)
 
   return (
     <div className="loginForm">
-      <div className="btn">
-        <button>
-          <Link to="/">Home</Link>
-        </button>
-        <button>
-          <Link to="/login">LogIn</Link>
-        </button>
-        <button>
-          <Link to="/signup">SignUp</Link>
-        </button>
+      <br />
+
+      <div className="routerNavBtns">
+        <Link to="/">Home</Link>
+        <Link to="/login">LogIn</Link>
+        <Link to="/signup">SignUp</Link>
       </div>
 
-      <form className="form " onSubmit={handleSubmit}>
-    
-	    <div className="title">Welcome Back to Login</div>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="title">Welcome Back to Login</div>
         <br />
         <div className="subtitle">Thank you for staying connected!</div>
         <div className="subtitle" id="inputError"></div>
@@ -82,10 +78,16 @@ const Login = () => {
           <label htmlFor="email" className="placeholder">
             Email
           </label>
+
+          {/* <span className="errorSpan" style={{ color: "red" }}>{errors.email}</span> */}
+          {touched.email && Boolean(errors.email) ? (
+            <span className="errorSpan">{errors.email}</span>
+          ) : null}
         </div>
+        <br />
         <div className="input-container ic2">
           <input
-            id="password"
+            id="userPassword"
             className="input"
             type="password"
             placeholder=" "
@@ -97,16 +99,18 @@ const Login = () => {
           />
           <div className="cut cut-short"></div>
           <label htmlFor="password" className="placeholder">
-            Password{" "}
+            Password
           </label>
+          <button type="button" className="showPswBtn" onClick={show_password}>
+            {showPswIcon === "eyeOpen" ? <FaRegEyeSlash /> : <FaRegEye />}
+          </button>
+          {touched.password && Boolean(errors.password) ? (
+            <span className="errorSpan">{errors.password}</span>
+          ) : null}
         </div>
-        <br />
-        <input type="checkbox" onClick={show_password} />
-        <span className="showPassword">Show Password</span>
-        <br />
-        <br />
 
-        <p id="error_msg"></p>
+        <br />
+        <br />
 
         <div className="mainDiv">
           <button type="submint" className="submitBtn">

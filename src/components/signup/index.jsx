@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "./index.css";
+import { useState } from "react";
+import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 
 // const initialValues = {
 // 	name: "",
@@ -14,17 +16,23 @@ import "./index.css";
 // 	repeat_password: "",
 // };
 
-// console.log(values.name.errors);
-// console.log(values.name.errors);
-
-const show_password = () => {
-  const pass1 = document.getElementById("password");
-  if (pass1.type === "password") pass1.type = "text";
-  else pass1.type = "password";
-};
-
 const Signup = () => {
   //   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+
+  //function to show password
+  const [showPswIcon, setShowPswIcon] = useState("eyeOpen");
+  const pass1 = document.querySelector("#userPassword");
+  const show_password = () => {
+    // console.log(pass1.type);
+    if (pass1.type === "password") {
+      pass1.type = "text";
+      setShowPswIcon("eyeClose");
+    } else {
+      pass1.type = "password";
+      setShowPswIcon("eyeOpen");
+    }
+  };
+
   const fmrk = useFormik({
     initialValues: {
       age: "",
@@ -73,7 +81,7 @@ const Signup = () => {
         .min(6, "Please enter more then 6 characters ")
         .max(65, "Please enter within 65 characters ")
         .oneOf([yup.ref("password"), null], "Passwords must match"), //line to check if two passwords match
-      userPhoneNumber: yup 
+      userPhoneNumber: yup
         .string("Enter your Phone Number")
         .required("Phone Number is required")
         .min(10, "Please enter more then 10 characters ")
@@ -82,6 +90,8 @@ const Signup = () => {
         .string()
         .url("Only enter Website URL")
         .max(40, "Website URL can't be more then 40"),
+
+      createdOn: yup.date().default(() => new Date()),
     }),
 
     onSubmit: (values) => {
@@ -91,20 +101,16 @@ const Signup = () => {
     },
   });
   // console.log(Formik)
-  if (fmrk.errors) console.log("error is", fmrk.errors);
+  // if (fmrk.errors) console.log("error is", fmrk.errors);
 
   return (
     <div className="signupForm">
-      <div className="btn">
-        <button>
-          <Link to="/">Home</Link>
-        </button>
-        <button>
-          <Link to="/login">LogIn</Link>
-        </button>
-        <button>
-          <Link to="/signup">SignUp</Link>
-        </button>
+      <br />
+
+      <div className="routerNavBtns">
+        <Link to="/">Home</Link>
+        <Link to="/login">LogIn</Link>
+        <Link to="/signup">SignUp</Link>
       </div>
 
       <form onSubmit={fmrk.handleSubmit} className="form form1">
@@ -128,7 +134,10 @@ const Signup = () => {
           <label htmlFor="userName" className="placeholder">
             Name *
           </label>
-          <span className="errorSpan">{fmrk.errors.name}</span>
+          {/* <span className="errorSpan">{fmrk.errors.name}</span> */}
+          {fmrk.touched.name && Boolean(fmrk.errors.name) ? (
+            <span className="errorSpan">{fmrk.errors.name}</span>
+          ) : null}
         </div>
         <br />
         <div className="input-container ic1">
@@ -147,7 +156,10 @@ const Signup = () => {
           <label htmlFor="userPhoneNumber" className="placeholder">
             Phone Number *
           </label>
-          <span className="errorSpan">{fmrk.errors.userPhoneNumber}</span>
+          {fmrk.touched.userPhoneNumber &&
+          Boolean(fmrk.errors.userPhoneNumber) ? (
+            <span className="errorSpan">{fmrk.errors.userPhoneNumber}</span>
+          ) : null}
         </div>
         <br />
         <div className="input-container ic2">
@@ -165,7 +177,9 @@ const Signup = () => {
           <label htmlFor="email" className="placeholder">
             Email *
           </label>
-          <span className="errorSpan">{fmrk.errors.email}</span>
+          {fmrk.touched.email && Boolean(fmrk.errors.email) ? (
+            <span className="errorSpan">{fmrk.errors.email}</span>
+          ) : null}
         </div>
         <br />
         <div className="input-container ic2">
@@ -183,7 +197,9 @@ const Signup = () => {
           <label htmlFor="websiteURL" className="placeholder">
             Website URL
           </label>
-          <span className="errorSpan">{fmrk.errors.websiteURL}</span>
+          {fmrk.touched.websiteURL && Boolean(fmrk.errors.websiteURL) ? (
+            <span className="errorSpan">{fmrk.errors.websiteURL}</span>
+          ) : null}
         </div>
         <br />
         <div className="input-container ic2">
@@ -201,7 +217,9 @@ const Signup = () => {
           <label htmlFor="adress" className="placeholder">
             Adress *
           </label>
-          <span className="errorSpan">{fmrk.errors.adress}</span>
+          {fmrk.touched.adress && Boolean(fmrk.errors.adress) ? (
+            <span className="errorSpan">{fmrk.errors.adress}</span>
+          ) : null}
         </div>
         <br />
         <div className="input-container ic2">
@@ -219,12 +237,14 @@ const Signup = () => {
           <label htmlFor="age" className="placeholder">
             Age *
           </label>
-          <span className="errorSpan">{fmrk.errors.age}</span>
+          {fmrk.touched.age && Boolean(fmrk.errors.age) ? (
+            <span className="errorSpan">{fmrk.errors.age}</span>
+          ) : null}
         </div>
         <br />
         <div className="input-container ic2">
           <input
-            id="password"
+            id="userPassword"
             className="input"
             type="password"
             placeholder=" "
@@ -237,14 +257,14 @@ const Signup = () => {
           <label htmlFor="Password" className="placeholder">
             Create Password *
           </label>
-          <input
-            className="showPasswordBtn"
-            type="checkbox"
-            onClick={show_password}
-          />
-          <span className="errorSpan">{fmrk.errors.password}</span>
+          <button type="button" className="showPswBtn" onClick={show_password}>
+            {showPswIcon === "eyeOpen" ? <FaRegEyeSlash /> : <FaRegEye />}
+          </button>
+          {fmrk.touched.password && Boolean(fmrk.errors.password) ? (
+            <span className="errorSpan">{fmrk.errors.password}</span>
+          ) : null}
         </div>
-        <br /> <br />
+        <br />
         {/* <input type="checkbox" onClick={show_password} /> */}
         {/* <span className="showPassword">Show Password</span> */}
         <div className="input-container ic2">
@@ -262,7 +282,10 @@ const Signup = () => {
           <label htmlFor="repeat_password" className="placeholder">
             Repeat Password
           </label>
-          <span className="errorSpan">{fmrk.errors.repeat_password}</span>
+          {fmrk.touched.repeat_password &&
+          Boolean(fmrk.errors.repeat_password) ? (
+            <span className="errorSpan">{fmrk.errors.repeat_password}</span>
+          ) : null}
         </div>
         <br /> <br />
         {/* <p id="error_msg">{errors}</p> */}
