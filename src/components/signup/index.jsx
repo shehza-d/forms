@@ -106,6 +106,10 @@ const Signup = () => {
   return (
     <div className="signupForm">
       <br />
+      <br />
+      <br />
+      <br />
+      <br />
 
       <div className="routerNavBtns">
         <Link to="/">Home</Link>

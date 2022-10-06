@@ -14,15 +14,6 @@
 	--form-bg-clr: #4553f3;
 }
 
-@media only screen and (max-width: 535px) {
-	.title {
-	  background-color: red;
-	}
-	.card{
-		width: 250px;
-	}
-  }
-
 
 .homePage {
 	height: 100vh;
@@ -64,8 +55,8 @@
 } */
 
 .App {
-	align-items: center;
 	display: flex;
+	align-items: center;
 	justify-content: center;
 	background-color: var(--bg-color);
 	color: var(--main-color);
@@ -297,6 +288,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	/* flex-wrap: wrap; */
 
 	/* width: 100%; */
 }
@@ -310,6 +302,8 @@
 	/* font-size: 36px; */
 	font-weight: 400;
 	transition: 1s;
+	/* flex-wrap: wrap; */
+
 }
 
 .routerNavBtns>a:nth-child(2) {
@@ -362,3 +356,20 @@
     animation: App-logo-spin infinite 20s linear;
   }
 } */
+
+
+
+@media only screen and (max-width: 535px) {
+	/* .title {
+	  background-color: red;
+	} */
+
+	.card{
+		width: 99%;
+		padding: 5px;
+	}
+	.iconscontainer>li>a {
+		padding-right: 10px;
+		font-size: 15px;
+	}
+  }

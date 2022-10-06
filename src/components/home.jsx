@@ -19,7 +19,7 @@ const Home = () => {
         <p>Welcome to Home Page of FORM</p>
         <p>made with React, Formik and yup</p>
         <p>
-          by <a href="https://github.com/shehza-d">Shehzad</a>
+          by <a href="https://github.com/shehza-d/forms">Shehzad</a>
         </p>
 
         <div className="mainDiv">
