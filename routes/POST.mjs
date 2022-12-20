@@ -26,15 +26,12 @@ const createUserFun = async (req, res) => {
         if (data) {
           console.log("user already exist: ", data);
           res.status(400);
-          res.send({
-            message: "user already exist, please try a different email",
-          });
+          res.send({ message: "User already exists, Try different email" });
           return;
         } else {
           // user not already exist
 
           const hashString = await stringToHash(body.password);
-          // .then((hashString) => {
           userModel.create(
             {
               name: body.name,
@@ -48,14 +45,13 @@ const createUserFun = async (req, res) => {
             (err, result) => {
               if (!err) {
                 console.log("data saved: ", result);
-                res.status(201).send({ message: "user is created" });
+                res.status(201).send({ message: "User is created" });
               } else {
                 console.log("db error: ", err);
                 res.status(500).send({ message: "internal server error" });
               }
             }
           );
-          // });
         }
       } else {
         console.log("db error: ", err);

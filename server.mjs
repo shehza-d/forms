@@ -18,8 +18,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "*"],
-    credentials: true,
+    origin: ["http://localhost:3000",'https://shehzad-forms.surge.sh', "*"],
+    // credentials: true,
   })
 );
 app.get("/test", () => console.log("server running"));

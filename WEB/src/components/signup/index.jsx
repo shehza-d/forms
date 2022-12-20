@@ -4,7 +4,8 @@ import * as yup from "yup";
 import "./index.css";
 import { useState } from "react";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 let baseURI = "";
@@ -105,11 +106,12 @@ export default function Signup() {
           userPhoneNumber: values.userPhoneNumber,
           websiteURL: values.websiteURL,
         });
-        console.log(res.data.message);
-        // console.log(res.data.message);
+        console.log(res);
+        toast(`${res.data.message}`); //https://www.npmjs.com/package/react-toastify
       } catch (err) {
         console.log(err);
         console.log(err.response.data.message);
+        toast(`${err.response.data.message}`)
       }
       //do something like there you can call API or send data to firebase
       //   if (errors) console.log("error is", errors);
@@ -119,7 +121,8 @@ export default function Signup() {
   // console.log(Formik)
   // if (fmrk.errors) console.log("error is", fmrk.errors);
 
-  return (
+  return (<>
+    <ToastContainer />
     <div className="signupForm">
       <br />
       <br />
@@ -320,5 +323,5 @@ export default function Signup() {
       </form>
       <br />
     </div>
-  );
+    </> );
 }
