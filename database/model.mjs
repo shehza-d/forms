@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export const userModel = mongoose.model(
-  "Users",
+  "UsersSchema",
   new mongoose.Schema({
     firstName: { type: String },
     lastName: { type: String },

@@ -1,6 +1,7 @@
-import { productModel } from "../database/model.mjs";
-const getAllDataFun = async (req, res) => {
-  productModel.find({}, (err, data) => {
+import { userModel } from "../database/model.mjs";
+
+const getAllUsersFun = async (req, res) => {
+  userModel.find({}, (err, data) => {
     if (!err) {
       res.send({
         message: "here is you product list",
@@ -13,23 +14,37 @@ const getAllDataFun = async (req, res) => {
     }
   });
 };
-
-const searchDataFun = async (req, res) => {
-  // productModel.findOne({ _id: id }, (err, data) => {
-    // productModel.find({ $text: { $search: "laptop" } }, (err, data) => {
-      productModel.find({ productName: req.params.searchTerm  }, (err, data) => {
+const getUser = async (req, res) => {
+  console.log("this is user id", req.params.id);
+  userModel.findOne({}, (err, data) => {
     if (!err) {
-      if (data) {
-        res.send({
-          message: "data mil gya",
-          data: data,
-        });
-      } else {
-        res.send({ message: "data nhi mila" });
-      }
+      res.send({
+        message: "here is you product list",
+        data: data,
+      });
     } else {
-      console.log(err);
+      res.status(500).send({
+        message: "server error",
+      });
     }
   });
 };
-export { getAllDataFun, searchDataFun };
+// const searchDataFun = async (req, res) => {
+//   // userModel.findOne({ _id: id }, (err, data) => {
+//     // userModel.find({ $text: { $search: "laptop" } }, (err, data) => {
+//       userModel.find({ productName: req.params.searchTerm  }, (err, data) => {
+//     if (!err) {
+//       if (data) {
+//         res.send({
+//           message: "data mil gya",
+//           data: data,
+//         });
+//       } else {
+//         res.send({ message: "data nhi mila" });
+//       }
+//     } else {
+//       console.log(err);
+//     }
+//   });
+// };
+export { getAllUsersFun, getUser };

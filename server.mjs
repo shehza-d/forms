@@ -1,10 +1,14 @@
 import express from "express";
-import path from "path";
+// import path from "path";
 import cors from "cors";
 import mongoose from "mongoose";
+import { stringToHash, varifyHash } from "bcrypt-inzi";
+import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 
-import userModel from "./database/model.mjs";
-
+import { userModel } from "./database/model.mjs";
+import { getAllUsersFun, getUser } from "./routes/GET.mjs";
+import { createUser, loginFun } from "./routes/POST.mjs";
 const SECRET = process.env.SECRET || "topsecret";
 
 const app = express();
@@ -18,86 +22,11 @@ app.use(
     credentials: true,
   })
 );
+app.get("/test", () => console.log("server running"));
+app.get("/users", getAllUsersFun);
+app.get("/user/:id", getUser);
 
-app.post("/login", async (req, res) => {
-  let body = req.body;
-
-  if (!body.email || !body.password) {
-    // null check - undefined, "", 0 , false, null , NaN
-    res.status(400).send(
-      `required fields missing, request example: 
-                {
-                    "email": "abc@abc.com",
-                    "password": "12345"
-                }`
-    );
-    return;
-  }
-
-  // check if user already exist // query email user
-  userModel.findOne(
-    { email: body.email },
-    // { email:1, firstName:1, lastName:1, age:1, password:0 },
-    "email firstName lastName age password",
-    async (err, data) => {
-      if (!err) {
-        console.log("data: ", data);
-
-        if (data) {
-          // user found
-          const isMatched = await varifyHash(body.password, data.password);
-          //   .then((isMatched) => {
-          console.log("isMatched: ", isMatched);
-
-          if (isMatched) {
-            var token = jwt.sign(
-              {
-                _id: data._id,
-                email: data.email,
-                iat: Math.floor(Date.now() / 1000) - 30,
-                exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
-              },
-              SECRET
-            );
-
-            console.log("token: ", token);
-
-            res.cookie("Token", token, {
-              maxAge: 86_400_000,
-              httpOnly: true,
-            });
-
-            res.send({
-              message: "login successful",
-              profile: {
-                email: data.email,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                age: data.age,
-                _id: data._id,
-              },
-            });
-            return;
-          } else {
-            console.log("user not found");
-            res.status(401).send({ message: "Incorrect email or password" });
-            return;
-          }
-          // });
-        } else {
-          // user not already exist
-          console.log("user not found");
-          res.status(401).send({ message: "Incorrect email or password" });
-          return;
-        }
-      } else {
-        console.log("db error: ", err);
-        res.status(500).send({ message: "login failed, please try later" });
-        return;
-      }
-    }
-  );
-});
+app.post("/login", loginFun);
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ this is for Students $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 // const __dirname = path.resolve();
