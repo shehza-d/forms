@@ -5,20 +5,18 @@ import "./index.css";
 import { useState } from "react";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 
-// const initialValues = {
-// 	name: "",
-// 	email: "",
-// 	userPhoneNumber: "",
-// 	adress:"",
-// 	websiteURL:"",
-// 	// name:"",
-// 	password:"",
-// 	repeat_password: "",
-// };
+import axios from "axios";
 
-const Signup = () => {
-  //   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+let baseURI = "";
+if (window.location.href.split(":")[0] === "http") {
+  baseURI = `http://localhost:3001`;
+} else {
+  baseURI = `https://busy-ruby-armadillo-wrap.cyclic.app`;
+}
+// const baseURI = `http://localhost:3001`;
+// const baseURI = `https://busy-ruby-armadillo-wrap.cyclic.app`;
 
+export default function Signup() {
   //function to show password
   const [showPswIcon, setShowPswIcon] = useState("eyeOpen");
   const pass1 = document.querySelector("#userPassword");
@@ -33,10 +31,11 @@ const Signup = () => {
     }
   };
 
+  //   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
   const fmrk = useFormik({
     initialValues: {
       age: "",
-      adress: "",
+      address: "",
       email: "",
       name: "",
       password: "",
@@ -53,9 +52,9 @@ const Signup = () => {
         .max(35, "User can't be older then 35")
         .positive("Age can't be negative")
         .integer("Enter age without decimal"),
-      adress: yup
-        .string("Enter your Adress")
-        .required("Adress is required")
+      address: yup
+        .string("Enter your address")
+        .required("address is required")
         .min(3, "Please enter more then 3 characters ")
         .max(40, "Please enter within 40 characters "),
       email: yup
@@ -94,11 +93,28 @@ const Signup = () => {
       createdOn: yup.date().default(() => new Date()),
     }),
 
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
+      try {
+        const res = await axios.post(`${baseURI}/user`, {
+          age: values.age,
+          address: values.address,
+          email: values.email,
+          name: values.name,
+          password: values.password,
+          userPhoneNumber: values.userPhoneNumber,
+          websiteURL: values.websiteURL,
+        });
+        console.log(res.data.message);
+        // console.log(res.data.message);
+      } catch (err) {
+        console.log(err);
+        console.log(err.response.data.message);
+      }
       //do something like there you can call API or send data to firebase
       //   if (errors) console.log("error is", errors);
     },
+    //if (errors) console.log("error is", errors);
   });
   // console.log(Formik)
   // if (fmrk.errors) console.log("error is", fmrk.errors);
@@ -209,20 +225,20 @@ const Signup = () => {
         <div className="input-container ic2">
           <input
             className="input"
-            id="adress"
+            id="address"
             type="text"
             placeholder=" "
-            name="adress"
-            value={fmrk.values.adress}
+            name="address"
+            value={fmrk.values.address}
             onChange={fmrk.handleChange}
             onBlur={fmrk.handleBlur}
           />
           <div className="cut"></div>
-          <label htmlFor="adress" className="placeholder">
-            Adress *
+          <label htmlFor="address" className="placeholder">
+            Address *
           </label>
-          {fmrk.touched.adress && Boolean(fmrk.errors.adress) ? (
-            <span className="errorSpan">{fmrk.errors.adress}</span>
+          {fmrk.touched.address && Boolean(fmrk.errors.address) ? (
+            <span className="errorSpan">{fmrk.errors.address}</span>
           ) : null}
         </div>
         <br />
@@ -305,6 +321,4 @@ const Signup = () => {
       <br />
     </div>
   );
-};
-
-export default Signup;
+}

@@ -8,6 +8,9 @@ My first Firebase Hosting
 This project was created with [Create React App](https://github.com/facebook/create-react-app) Routing, Formik and Yup validation.
 
 ### `SHEHZAD`
+
+server is at https://busy-ruby-armadillo-wrap.cyclic.app
+
 https://shehzad-form.surge.sh/
 
 https://abc-forms-8acd8.web.app/

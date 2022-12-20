@@ -1,18 +1,84 @@
 import { userModel } from "../database/model.mjs";
+import { stringToHash, varifyHash } from "bcrypt-inzi";
 
-const createUser = async (req, res) => {};
+const createUserFun = async (req, res) => {
+  let body = req.body;
+  console.log(body);
+
+  // null check - undefined, "", 0 , false, null , NaN
+  if (
+    !body.age ||
+    !body.address ||
+    !body.name ||
+    !body.userPhoneNumber ||
+    !body.email ||
+    !body.password
+  ) {
+    res.status(400).send(`required fields missing,`);
+    return;
+  } else {
+    // check if user already exist // query email user
+    userModel.findOne({ email: body.email }, async (err, data) => {
+      if (!err) {
+        console.log("data: ", data);
+
+        // user already exist
+        if (data) {
+          console.log("user already exist: ", data);
+          res.status(400);
+          res.send({
+            message: "user already exist, please try a different email",
+          });
+          return;
+        } else {
+          // user not already exist
+
+          const hashString = await stringToHash(body.password);
+          // .then((hashString) => {
+          userModel.create(
+            {
+              name: body.name,
+              age: body.age,
+              email: body.email.toLowerCase(),
+              password: hashString,
+              websiteURL: body.websiteURL,
+              address: body.address,
+              userPhoneNumber: body.userPhoneNumber,
+            },
+            (err, result) => {
+              if (!err) {
+                console.log("data saved: ", result);
+                res.status(201).send({ message: "user is created" });
+              } else {
+                console.log("db error: ", err);
+                res.status(500).send({ message: "internal server error" });
+              }
+            }
+          );
+          // });
+        }
+      } else {
+        console.log("db error: ", err);
+        res.status(500).send({ message: "db error in query" });
+        return;
+      }
+    });
+  }
+};
 const loginFun = async (req, res) => {
   let body = req.body;
+  console.log(body);
 
-  if (!body.email || !body.password) {
-    // null check - undefined, "", 0 , false, null , NaN
-    res.status(400).send(
-      `required fields missing, request example: 
-                {
-                    "email": "abc@abc.com",
-                    "password": "12345"
-                }`
-    );
+  // null check - undefined, "", 0 , false, null , NaN
+  if (
+    !body.age ||
+    !body.address ||
+    !body.name ||
+    !body.userPhoneNumber ||
+    !body.email ||
+    !body.password
+  ) {
+    res.status(400).send(`required fields missing,`);
     return;
   }
 
@@ -170,4 +236,4 @@ const loginFun = async (req, res) => {
 //     );
 //   }
 
-export { createUser, loginFun };
+export { createUserFun, loginFun };

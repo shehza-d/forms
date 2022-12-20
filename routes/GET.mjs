@@ -1,4 +1,5 @@
 import { userModel } from "../database/model.mjs";
+// import { stringToHash, varifyHash } from "bcrypt-inzi";
 
 const getAllUsersFun = async (req, res) => {
   userModel.find({}, (err, data) => {

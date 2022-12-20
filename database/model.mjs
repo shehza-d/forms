@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
 
 export const userModel = mongoose.model(
-  "UsersSchema",
+  "Users",
   new mongoose.Schema({
-    firstName: { type: String },
-    lastName: { type: String },
+    name: { type: String, required: true },
+    address: { type: String, required: true },
+    websiteURL: { type: String, required: false },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    age: { type: Number, min: 17, max: 65, default: 18 },
-    // isMarried: { type: Boolean, default: false },
+    age: { type: Number, min: 17, max: 65, default: 18,required: true },
+    userPhoneNumber: { type: String, required: true },
+    isStudent: { type: Boolean, default: false },
     createdOn: { type: Date, default: Date.now },
   })
 );

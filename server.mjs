@@ -2,13 +2,13 @@ import express from "express";
 // import path from "path";
 import cors from "cors";
 import mongoose from "mongoose";
-import { stringToHash, varifyHash } from "bcrypt-inzi";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 
 import { userModel } from "./database/model.mjs";
 import { getAllUsersFun, getUser } from "./routes/GET.mjs";
-import { createUser, loginFun } from "./routes/POST.mjs";
+import { createUserFun, loginFun } from "./routes/POST.mjs";
+
 const SECRET = process.env.SECRET || "topsecret";
 
 const app = express();
@@ -26,6 +26,9 @@ app.get("/test", () => console.log("server running"));
 app.get("/users", getAllUsersFun);
 app.get("/user/:id", getUser);
 
+app.post("/user", createUserFun);
+app.post("/login", loginFun);
+app.post("/login", loginFun);
 app.post("/login", loginFun);
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ this is for Students $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
