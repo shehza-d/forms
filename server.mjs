@@ -2,14 +2,12 @@ import express from "express";
 // import path from "path";
 import cors from "cors";
 import mongoose from "mongoose";
-import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 
-import { userModel } from "./database/model.mjs";
+// import { userModel } from "./database/model.mjs";
 import { getAllUsersFun, getUser } from "./routes/GET.mjs";
 import { createUserFun, loginFun } from "./routes/POST.mjs";
 
-const SECRET = process.env.SECRET || "topsecret";
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -17,19 +15,22 @@ const port = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cookieParser());
 app.use(
-  cors({
-    origin: ["http://localhost:3000",'https://shehzad-forms.surge.sh', "*"],
+  cors({ 
+        origin: ["http://localhost:3000", "https://shehzad-forms.surge.sh", "*"],
     // credentials: true,
   })
 );
-app.get("/test", () => console.log("server running"));
+app.get("/test", (req, res) => {
+  console.log("server running");
+  res.send("Server Running");
+});
 app.get("/users", getAllUsersFun);
 app.get("/user/:id", getUser);
 
-app.post("/user", createUserFun);
+app.post("/signup", createUserFun);
 app.post("/login", loginFun);
-app.post("/login", loginFun);
-app.post("/login", loginFun);
+// app.post("/login", loginFun);
+// app.post("/login", loginFun);
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ this is for Students $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 // const __dirname = path.resolve();
@@ -71,7 +72,7 @@ mongoose.connection.on("error", (err) => {
 process.on("SIGINT", () => {
   //this function will run jst before app is closing
   console.log("app is terminating");
-  mongoose.connection.close(function () {
+  mongoose.connection.close(() => {
     console.log("Mongoose default connection closed");
     process.exit(0);
   });

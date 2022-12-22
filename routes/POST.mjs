@@ -1,5 +1,9 @@
 import { userModel } from "../database/model.mjs";
 import { stringToHash, varifyHash } from "bcrypt-inzi";
+import jwt from "jsonwebtoken";
+
+
+const SECRET = process.env.SECRET || "topsecret";
 
 const createUserFun = async (req, res) => {
   let body = req.body;
@@ -62,52 +66,48 @@ const createUserFun = async (req, res) => {
   }
 };
 const loginFun = async (req, res) => {
-  let body = req.body;
-  console.log(body);
-
-  // null check - undefined, "", 0 , false, null , NaN
-  if (
-    !body.age ||
-    !body.address ||
-    !body.name ||
-    !body.userPhoneNumber ||
-    !body.email ||
-    !body.password
-  ) {
-    res.status(400).send(`required fields missing,`);
+  console.log("login fun");
+  const body = req.body;
+  if (!body.email || !body.password) {
+    res.status(422).send({ message: `Required parameters are missing!` });
     return;
   }
 
-  // check if user already exist // query email user
+  //check if user exist
   userModel.findOne(
-    { email: body.email },
-    // { email:1, firstName:1, lastName:1, age:1, password:0 },
-    "email firstName lastName age password",
+    { email: body.email.toLowerCase() },
+    "email password",//this is projection (if you want to exclude something use - like "-age")
     async (err, data) => {
-      if (!err) {
-        console.log("data: ", data);
-
-        if (data) {
+      if (err) {
+        console.log("db error: ", err);
+        res.status(500).send({ message: "login failed, please try later" });
+        return;
+      } else {
+        //console.log("data: ", data);
+        if (!data) {
+          // user not already exist
+          console.log("user not found");
+          res.status(401).send({ message: "Incorrect email or password" });
+          return;
+        } else {
           // user found
           const isMatched = await varifyHash(body.password, data.password);
-          //   .then((isMatched) => {
           console.log("isMatched: ", isMatched);
-
           if (isMatched) {
-            var token = jwt.sign(
+            const token = jwt.sign(
               {
                 _id: data._id,
                 email: data.email,
                 iat: Math.floor(Date.now() / 1000) - 30,
-                exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
+                exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,//security
               },
               SECRET
             );
 
-            console.log("token: ", token);
+            console.log("token: ", token);//it's a security vulnerability to print token in production 
 
             res.cookie("Token", token, {
-              maxAge: 86_400_000,
+              maxAge: 86_400_000,//for browser and user experience 
               httpOnly: true,
             });
 
@@ -123,21 +123,11 @@ const loginFun = async (req, res) => {
             });
             return;
           } else {
-            console.log("user not found");
-            res.status(401).send({ message: "Incorrect email or password" });
+            console.log("password did not match");
+            res.status(401).send({ message: "Incorrect Password" });
             return;
           }
-          // });
-        } else {
-          // user not already exist
-          console.log("user not found");
-          res.status(401).send({ message: "Incorrect email or password" });
-          return;
         }
-      } else {
-        console.log("db error: ", err);
-        res.status(500).send({ message: "login failed, please try later" });
-        return;
       }
     }
   );
