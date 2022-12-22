@@ -97,16 +97,20 @@ export default function Signup() {
     onSubmit: async (values) => {
       console.log(values);
       try {
-        const res = await axios.post(`${baseURI}/signup`, {
-          age: values.age,
-          address: values.address,
-          email: values.email,
-          name: values.name,
-          password: values.password,
-          userPhoneNumber: values.userPhoneNumber,
-          websiteURL: values.websiteURL,
-        });
-        console.log(res);
+        const res = await axios.post(
+          `${baseURI}/signup`,
+          {
+            age: values.age,
+            address: values.address,
+            email: values.email,
+            name: values.name,
+            password: values.password,
+            userPhoneNumber: values.userPhoneNumber,
+            websiteURL: values.websiteURL,
+          },
+          // { withCredentials: true }//we are not sending cookies
+        );
+        console.log("Signup successful",res);
         toast(`${res.data.message}`); //https://www.npmjs.com/package/react-toastify
       } catch (err) {
         console.log(err);

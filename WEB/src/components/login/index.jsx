@@ -18,8 +18,6 @@ if (window.location.href.split(":")[0] === "http") {
 // const baseURI = `http://localhost:3001`;
 // const baseURI = `https://busy-ruby-armadillo-wrap.cyclic.app`;
 
-
-
 export default function Login() {
   //function to show password
   const [showPswIcon, setShowPswIcon] = useState("eyeOpen");
@@ -53,27 +51,30 @@ export default function Login() {
           .min(6, "Please enter more then 6 characters ")
           .max(64, "Please enter within 64 characters "),
       }),
-      onSubmit: async(values) => {
+      onSubmit: async (values) => {
         console.log(values);
         try {
-          const res = await axios.post(`${baseURI}/login`, {
-            email: values.email,
-            password: values.password,
-          });
+          const res = await axios.post(
+            `${baseURI}/login`,
+            {
+              email: values.email,
+              password: values.password,
+            },
+            { withCredentials: true }
+          );
           console.log(res);
           toast(`${res.data.message}`); //https://www.npmjs.com/package/react-toastify
         } catch (err) {
           console.log(err);
           console.log(err.response.data.message);
-          toast(`${err.response.data.message}`)
+          toast(`${err.response.data.message}`);
         }
       },
     });
 
   return (
-
     <div className="loginForm">
-    <ToastContainer />
+      <ToastContainer />
 
       <br />
       <br />
@@ -155,4 +156,4 @@ export default function Login() {
       </form>
     </div>
   );
-};
+}
