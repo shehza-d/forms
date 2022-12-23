@@ -37,7 +37,6 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String },
   email: { type: String, required: true },
   password: { type: String, required: true },
-
   createdOn: { type: Date, default: Date.now },
 });
 const userModel = mongoose.model("Users", userSchema);
@@ -68,11 +67,9 @@ app.post("/signup", (req, res) => {
       if (user) {
         // user already exist
         console.log("user already exist: ", user);
-        res
-          .status(400)
-          .send({
-            message: "user already exist,, please try a different email",
-          });
+        res.status(400).send({
+          message: "user already exist,, please try a different email",
+        });
         return;
       } else {
         // user not already exist
@@ -126,49 +123,49 @@ app.post("/login", (req, res) => {
   userModel.findOne(
     { email: body.email },
     "firstName lastName email password",
-    async(err, data) => {
+    async (err, data) => {
       if (!err) {
         console.log("data: ", data);
 
         if (data) {
           // user found
-         const isMatched = await varifyHash(body.password, data.password)
-            console.log("isMatched: ", isMatched);
+          const isMatched = await varifyHash(body.password, data.password);
+          console.log("isMatched: ", isMatched);
 
-            if (isMatched) {
-              const token = jwt.sign(
-                {
-                  _id: data._id,
-                  email: data.email,
-                  iat: Math.floor(Date.now() / 1000) - 30,
-                  exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
-                },
-                SECRET
-              );
+          if (isMatched) {
+            const token = jwt.sign(
+              {
+                _id: data._id,
+                email: data.email,
+                iat: Math.floor(Date.now() / 1000) - 30,
+                exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
+              },
+              SECRET
+            );
 
-              console.log("token: ", token);
+            console.log("token: ", token);
 
-              res.cookie("Token", token, {
-                maxAge: 86_400_000,
-                httpOnly: true,
-              });
+            res.cookie("Token", token, {
+              maxAge: 86_400_000,
+              httpOnly: true,
+            });
 
-              res.send({
-                message: "login successful",
-                profile: {
-                  email: data.email,
-                  firstName: data.firstName,
-                  lastName: data.lastName,
-                  age: data.age,
-                  _id: data._id,
-                },
-              });
-              return;
-            } else {
-              console.log("password did not match");
-              res.status(401).send({ message: "Incorrect email or password" });
-              return;
-            }
+            res.send({
+              message: "login successful",
+              profile: {
+                email: data.email,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                age: data.age,
+                _id: data._id,
+              },
+            });
+            return;
+          } else {
+            console.log("password did not match");
+            res.status(401).send({ message: "Incorrect email or password" });
+            return;
+          }
         } else {
           // user not already exist
           console.log("user not found");

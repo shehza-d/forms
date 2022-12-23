@@ -112,10 +112,10 @@ const loginFun = async (req, res) => {
             });
 
             res.send({
-              message: "login successful",
+              message: "Login successful",
               profile: {
                 email: data.email,
-                firstName: data.firstName,
+                name: data.firstName,
                 lastName: data.lastName,
                 age: data.age,
                 _id: data._id,
