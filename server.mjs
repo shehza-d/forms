@@ -1,3 +1,4 @@
+// front end per credintal ture na ho || cors proper na ho || sab apis per credintal ture hoga || secure :ture always || sameSite check
 import express from "express";
 // import path from "path";
 import cors from "cors";
