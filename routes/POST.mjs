@@ -109,15 +109,17 @@ const loginFun = async (req, res) => {
             res.cookie("Token", token, {
               maxAge: 86_400_000,//for browser and user experience 
               httpOnly: true,
+              sameSite: true, 
+              secure: true
             });
 
             res.send({
               message: "Login successful",
               profile: {
                 email: data.email,
-                name: data.firstName,
-                lastName: data.lastName,
-                age: data.age,
+                name: data?.firstName,
+                lastName: data?.lastName,
+                age: data?.age,
                 _id: data._id,
               },
             });
