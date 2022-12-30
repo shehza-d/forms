@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.mjs",
-    "dev": "node --watch server.mjs"
+    "dev": "nodemon server.mjs"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "@types/mongodb": "^4.0.7",
     "@types/mongoose": "^5.11.97",
     "@types/multer": "^1.4.7",
-    "@types/node": "^18.11.11"
+    "@types/node": "^18.11.11",
+    "nodemon": "^2.0.20"
   }
 }

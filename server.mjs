@@ -20,11 +20,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "http://localhost:3000/signup",
-      "http://localhost:3000/login",
       "https://shehzad-forms.surge.sh",
-      "https://shehzad-forms.surge.sh/signup",
-      "https://shehzad-forms.surge.sh/login",
       "*",
     ],
     credentials: true,//this is important
