@@ -1,7 +1,10 @@
 # Form with react
 <h3 align="center">Show some ❤ by <img src="https://imgur.com/o7ncZFp.jpg" height=25px width=25px> this repository</h3>
 
-##Ultimate Forms Practice in React with formik and yup validation creating user on MongoDB with hash password and JSONWebTokens
+## Ultimate Forms Practice in React with formik and yup validation creating user on MongoDB with hash password and JSONWebTokens
+
+## [React Hook Forms Best Course](https://www.youtube.com/playlist?list=PLC3y8-rFHvwjmgBr1327BA5bVXoQH-w5s) 
+
 
 My first Firebase Hosting
 
